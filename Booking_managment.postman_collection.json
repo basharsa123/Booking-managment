@@ -1,0 +1,662 @@
+{
+	"info": {
+		"_postman_id": "6c3b65c7-9a9b-48d4-befb-94f12f68702d",
+		"name": "Booking_managment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41278632"
+	},
+	"item": [
+		{
+			"name": "events",
+			"item": [
+				{
+					"name": "event-show-all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/event/index",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"event",
+								"index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event-show-specific-event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/event/show/10",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"event",
+								"show",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Raizer",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "be great again",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2025-5-25",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1efe40f1-d6ed-45a0-864d-fd9d3dcf22d2"
+								},
+								{
+									"key": "capacity",
+									"value": "140",
+									"type": "text"
+								},
+								{
+									"key": "created_by",
+									"value": "name",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://booking_managment.test/api/event/create",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"event",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create-event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "Raizer",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "be great again",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2025-5-25",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "postman-cloud:///1efe40f1-d6ed-45a0-864d-fd9d3dcf22d2"
+										},
+										{
+											"key": "capacity",
+											"value": "140",
+											"type": "text"
+										},
+										{
+											"key": "created_by",
+											"value": "name",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://booking_managment.test/api/event/create",
+									"protocol": "http",
+									"host": [
+										"booking_managment",
+										"test"
+									],
+									"path": [
+										"api",
+										"event",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.20"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 06 May 2025 12:52:14 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "\"Event created successfully\""
+						}
+					]
+				},
+				{
+					"name": "update-event-error",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "ddd"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1efe3f8a-1403-4930-afdf-a0ce69fc02d8",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://booking_managment.test/api/event/update/1",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"event",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/event/delete/11",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"event",
+								"delete",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "to make a crud for event"
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "show-books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/book/index",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"book",
+								"index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/book/create?event_id=2&status=Pending",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"book",
+								"create"
+							],
+							"query": [
+								{
+									"key": "event_id",
+									"value": "2"
+								},
+								{
+									"key": "status",
+									"value": "Pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/book/delete/50",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"book",
+								"delete",
+								"50"
+							],
+							"query": [
+								{
+									"key": "event_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user_authenticate",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9va2luZ19tYW5hZ21lbnQudGVzdC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0NjM1OTU2NCwiZXhwIjoxNzQ2MzYzMTY0LCJuYmYiOjE3NDYzNTk1NjQsImp0aSI6ImhBTzhCSHZxeUY3NHR3eFQiLCJzdWIiOiIyMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.EFlbx97k6aaziejqpB7DNW97AQjfCQjyfKcTXQAz9qM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/auth/register?name=bashar&email=basharsawas5219348@gmail.com&password=b.s137955",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "bashar"
+								},
+								{
+									"key": "email",
+									"value": "basharsawas5219348@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "b.s137955"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://booking_managment.test/api/auth/register?name=bashar&email=basharsawas5219348@gmail.com&password=b.s137955",
+									"protocol": "http",
+									"host": [
+										"booking_managment",
+										"test"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "bashar"
+										},
+										{
+											"key": "email",
+											"value": "basharsawas5219348@gmail.com"
+										},
+										{
+											"key": "password",
+											"value": "b.s137955"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/auth/login?email=basharsawas5219348@gmail.com&password=b.s137955",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "basharsawas5219348@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "b.s137955"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://booking_managment.test/api/auth/login?email=basharsawas5219348@gmail.com&password=b.s137955",
+									"protocol": "http",
+									"host": [
+										"booking_managment",
+										"test"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "basharsawas5219348@gmail.com"
+										},
+										{
+											"key": "password",
+											"value": "b.s137955"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.20"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 May 2025 21:55:14 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9va2luZ19tYW5hZ21lbnQudGVzdC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0NjQ4MjExNCwiZXhwIjoxNzQ2NDg1NzE0LCJuYmYiOjE3NDY0ODIxMTQsImp0aSI6InRTWE1tNmpVTE56bzZacmEiLCJzdWIiOiI2IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.PWvu8_n7mlW6u0Imyt890xtPYtT0fDHKembKbW0lpoI\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": 60,\n    \"user\": {\n        \"id\": 6,\n        \"name\": \"bashar\",\n        \"email\": \"basharsawas5219348@gmail.com\",\n        \"email_verified_at\": null,\n        \"password\": \"$2y$12$ozrsoKWYrLsXRzdYZ3PzHuTzNQiQSRIoJkyxg6tiOqFKaPTw14YRO\",\n        \"remember_token\": null,\n        \"created_at\": \"2025-05-05T21:22:12.000000Z\",\n        \"updated_at\": \"2025-05-05T21:22:12.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://booking_managment.test/api/auth/me",
+							"protocol": "http",
+							"host": [
+								"booking_managment",
+								"test"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9va2luZ19tYW5hZ21lbnQudGVzdC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0NjUzNTg3NCwiZXhwIjoxNzQ2NTM5NDc0LCJuYmYiOjE3NDY1MzU4NzQsImp0aSI6InVDSWFZbkJhaWluRm5nb1AiLCJzdWIiOiI2IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.uSzFEAVjDocuIxIBBNdVT2bHdCfST8DM1CVvjEmY4HM",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
