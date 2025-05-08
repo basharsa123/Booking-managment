@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BookingCreated;
 use App\Models\book;
 use App\Models\event;
 use App\Models\User;
@@ -33,7 +34,7 @@ class BookController extends Controller
 
     public function store(Request $request )
     {
-//        \Illuminate\Support\Facades\Event::dispatch("BookingCreated");
+        BookingCreated::dispatch($request);
 
 
         try{

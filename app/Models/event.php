@@ -19,6 +19,9 @@ class event extends Model
         "capacity",
         "created_by"
     ];
+    protected $casts = [
+        'date' => 'datetime', // Automatically cast to Carbon instance
+    ];
     private static array $slots = [];
     public static function setSlots($id , $value)
     {
@@ -42,4 +45,8 @@ class event extends Model
         return $this->belongsTo(User::class );
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class );
+    }
 }

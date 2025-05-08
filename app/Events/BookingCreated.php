@@ -20,36 +20,35 @@ class BookingCreated
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct($request)
     {
-        dd("dd");
-//        try{
-//            if (!Auth::check()) {
-//                return response("Unauthorized", 401);
-//            }
-//            $credentials = $request->validate([
-//                "event_id" => ["required"],
-//                "status" => ["required"],
-//            ]);
-//            $credentials['event_id'] = request('event_id');
-//            $credentials['registered_at'] = now();
-//            $credentials["attendance"] = $request->attendance ?? 0;
-//            // ? check if the event capacity and decrease it by one
-//            //  event::checkSlotAndBook($request->input("event_id") , event::find( request('event_id'))->capacity);
-//
-//
-//            //?register a book
-//            book::create([
-//                "user_id" => Auth::user()->id,
-//                "event_id" => $credentials['event_id'],
-//                "registered_at" => $credentials['registered_at'],
-//                "status" => $credentials['status'],
-//                "attendance" => $credentials['attendance'],
-//            ]);
-//        }catch (\Exception $e){
-//            return response( $e->getMessage(), 422);
-//        }
-//        return response("Book added successfully", 201);
+        try{
+            if (!Auth::check()) {
+                return response("Unauthorized", 401);
+            }
+
+            $credentials = $request->validate([
+                "event_id" => ["required"],
+                "status" => ["required"],
+            ]);
+            $credentials['event_id'] = request('event_id');
+            $credentials['registered_at'] = now();
+            $credentials["attendance"] = $request->attendance ?? 0;
+            // ? check if the event capacity and decrease it by one
+            //  event::checkSlotAndBook($request->input("event_id") , event::find( request('event_id'))->capacity);
+
+            //?register a book
+            book::create([
+                "user_id" => Auth::user()->id,
+                "event_id" => $credentials['event_id'],
+                "registered_at" => $credentials['registered_at'],
+                "status" => $credentials['status'],
+                "attendance" => $credentials['attendance'],
+            ]);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+        return response("Book added successfully", 201);
 
     }
 

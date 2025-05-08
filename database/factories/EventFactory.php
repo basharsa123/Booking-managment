@@ -22,7 +22,7 @@ class EventFactory extends Factory
             "user_id" => user::all()->random()->id, // to get random user id
             "title" => $this->faker->title(),
             "description" => $this->faker->paragraph(),
-            "date" => $this->faker->date("Y-m-d H:i:s"),
+            "date" => $this->faker->date("Y-m-d"),
             "image" => $this->faker->imageUrl(),
             "capacity" => $this->faker->numberBetween(1,249),
             "created_by" => $this->faker->name()
