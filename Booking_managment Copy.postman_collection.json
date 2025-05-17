@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "6c3b65c7-9a9b-48d4-befb-94f12f68702d",
-		"name": "Booking_managment",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_postman_id": "6dcbd2fb-4812-4b40-b11e-1ba6ed82e975",
+		"name": "Booking_managment Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "41278632"
 	},
 	"item": [
@@ -14,19 +14,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://booking_managment.test/api/event/index",
-							"protocol": "http",
-							"host": [
-								"booking_managment",
-								"test"
-							],
-							"path": [
-								"api",
-								"event",
-								"index"
-							]
-						}
+						"url": "http://booking_managment.test/api/event/index"
 					},
 					"response": []
 				},
@@ -35,20 +23,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://booking_managment.test/api/event/show/10",
-							"protocol": "http",
-							"host": [
-								"booking_managment",
-								"test"
-							],
-							"path": [
-								"api",
-								"event",
-								"show",
-								"10"
-							]
-						}
+						"url": "http://booking_managment.test/api/event/show/10"
 					},
 					"response": []
 				},
@@ -98,19 +73,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "http://booking_managment.test/api/event/create",
-							"protocol": "http",
-							"host": [
-								"booking_managment",
-								"test"
-							],
-							"path": [
-								"api",
-								"event",
-								"create"
-							]
-						}
+						"url": "http://booking_managment.test/api/event/create"
 					},
 					"response": [
 						{
@@ -159,19 +122,7 @@
 										}
 									]
 								},
-								"url": {
-									"raw": "http://booking_managment.test/api/event/create",
-									"protocol": "http",
-									"host": [
-										"booking_managment",
-										"test"
-									],
-									"path": [
-										"api",
-										"event",
-										"create"
-									]
-								}
+								"url": "http://booking_managment.test/api/event/create"
 							},
 							"status": "Created",
 							"code": 201,
@@ -220,7 +171,7 @@
 					]
 				},
 				{
-					"name": "update-event-error",
+					"name": "update-event",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -239,20 +190,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "http://booking_managment.test/api/event/update/1",
-							"protocol": "http",
-							"host": [
-								"booking_managment",
-								"test"
-							],
-							"path": [
-								"api",
-								"event",
-								"update",
-								"1"
-							]
-						}
+						"url": "http://booking_managment.test/api/event/update/1"
 					},
 					"response": []
 				},
@@ -261,20 +199,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "http://booking_managment.test/api/event/delete/11",
-							"protocol": "http",
-							"host": [
-								"booking_managment",
-								"test"
-							],
-							"path": [
-								"api",
-								"event",
-								"delete",
-								"11"
-							]
-						}
+						"url": "http://booking_managment.test/api/event/delete/11"
 					},
 					"response": []
 				}
@@ -289,19 +214,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://booking_managment.test/api/book/index",
-							"protocol": "http",
-							"host": [
-								"booking_managment",
-								"test"
-							],
-							"path": [
-								"api",
-								"book",
-								"index"
-							]
-						}
+						"url": "http://booking_managment.test/api/book/index"
 					},
 					"response": []
 				},
@@ -380,13 +293,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9va2luZ19tYW5hZ21lbnQudGVzdC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0NjM1OTU2NCwiZXhwIjoxNzQ2MzYzMTY0LCJuYmYiOjE3NDYzNTk1NjQsImp0aSI6ImhBTzhCSHZxeUY3NHR3eFQiLCJzdWIiOiIyMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.EFlbx97k6aaziejqpB7DNW97AQjfCQjyfKcTXQAz9qM",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9va2luZ19tYW5hZ21lbnQudGVzdC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0NjM1OTU2NCwiZXhwIjoxNzQ2MzYzMTY0LCJuYmYiOjE3NDYzNTk1NjQsImp0aSI6ImhBTzhCSHZxeUY3NHR3eFQiLCJzdWIiOiIyMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.EFlbx97k6aaziejqpB7DNW97AQjfCQjyfKcTXQAz9qM"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -452,10 +361,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				},
@@ -464,13 +373,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": ""
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -587,19 +492,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "http://booking_managment.test/api/auth/logout",
-							"protocol": "http",
-							"host": [
-								"booking_managment",
-								"test"
-							],
-							"path": [
-								"api",
-								"auth",
-								"logout"
-							]
-						}
+						"url": "http://booking_managment.test/api/auth/logout"
 					},
 					"response": []
 				},
@@ -608,19 +501,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://booking_managment.test/api/auth/me",
-							"protocol": "http",
-							"host": [
-								"booking_managment",
-								"test"
-							],
-							"path": [
-								"api",
-								"auth",
-								"me"
-							]
-						}
+						"url": "http://booking_managment.test/api/auth/me"
 					},
 					"response": []
 				}
@@ -629,13 +510,9 @@
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9va2luZ19tYW5hZ21lbnQudGVzdC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0NjUzNTg3NCwiZXhwIjoxNzQ2NTM5NDc0LCJuYmYiOjE3NDY1MzU4NzQsImp0aSI6InVDSWFZbkJhaWluRm5nb1AiLCJzdWIiOiI2IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.uSzFEAVjDocuIxIBBNdVT2bHdCfST8DM1CVvjEmY4HM",
-				"type": "string"
-			}
-		]
+		"bearer": {
+			"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9va2luZ19tYW5hZ21lbnQudGVzdC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0NjUzNTg3NCwiZXhwIjoxNzQ2NTM5NDc0LCJuYmYiOjE3NDY1MzU4NzQsImp0aSI6InVDSWFZbkJhaWluRm5nb1AiLCJzdWIiOiI2IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.uSzFEAVjDocuIxIBBNdVT2bHdCfST8DM1CVvjEmY4HM"
+		}
 	},
 	"event": [
 		{
