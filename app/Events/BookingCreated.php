@@ -48,9 +48,7 @@ class BookingCreated
         }catch (\Exception $e){
             return $e->getMessage();
         }
-        return response("Book added successfully", 201);
+        return 1;
 
     }
-
-
 }
