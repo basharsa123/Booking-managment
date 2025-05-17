@@ -35,7 +35,7 @@ Route::group(
         Route::get("/index", [EventController::class, "index"])->name("event.index");
         Route::get("/show/{id}", [EventController::class, "show"])->name("event.show");
         Route::post("/create", [EventController::class, "store"])->name("event.store")->middleware("auth");
-        Route::put("/update/{id}", [EventController::class, "update"])->name("event.update")->middleware("auth");
+        Route::post("/update/{id}", [EventController::class, "update"])->name("event.update")->middleware("auth");
         Route::delete("/delete/{id}", [EventController::class, "destroy"])->name("event.destroy")->middleware("auth");
     }
 );

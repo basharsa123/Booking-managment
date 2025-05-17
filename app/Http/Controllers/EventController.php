@@ -88,56 +88,57 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $event = event::find($id);
-        //? validate the request
-        try{
+
+        // Find the event
+        $event = Event::find($id);
+        if (!$event) {
+            return response()->json("Event not found", 404);
+        }
+
+        // Validate the request
+        try {
             $credentials = $request->validate([
-                "date" => "date",
+                "title" => "required|string|max:255",
+                "description" => "required|string",
+                "date" => "nullable|date",
                 "image" => "image|max:2048",
                 "capacity" => "integer|max:250",
             ]);
 
-        //?check if the image exist before then delete it
-        if ($request->hasFile('image')) {
+            // Prepare data for update
+            $dataToUpdate = [
+                "user_id" => $event->user_id,
+                "title" => $credentials['title'],
+                "description" =>$credentials['description'],
+                "date" => $credentials['date'],
+                "capacity" => $credentials['capacity'],
+                "created_by" => $event->created_by,
+            ];
 
-            $file_exist_before= event::find($id)->image;
-             if ($file_exist_before) {
-                Storage::disk("public")->delete($file_exist_before);
-             }
-             //? upload the image
+            // Handle image upload
+            if ($request->hasFile('image')) {
+                // Delete old image if exists
+                if ($event->image) {
+                    Storage::disk("public")->delete($event->image);
+                }
+                // Upload new image
                 $file_name = time() . '_' . $request->file("image")->getClientOriginalName();
                 $file_path = $request->file("image")->storeAs('events', $file_name, 'public');
-
-                $event->update([
-                    "user_id" => $event->user_id,
-                    "title" =>$credentials["title"] ?? $event->title ,
-                    "description" => $credentials["description"] ?? $event->description,
-                    "date" => $credentials["date"] ?? $event->date,
-                    "image" => $file_path ?? $event->image,
-                    "capacity" => $credentials['capacity'] ?? $event->capacity,
-                    "created_by" => $credentials['created_by'] ?? $event->created_by,
-                ]);
-                $event->save();
+                $dataToUpdate['image'] = $file_path;
+            } else {
+                // Keep old image if no new image is uploaded
+                $dataToUpdate['image'] = $event->image;
             }
-        // upload file if there is no file
-        else{
-            $event = event::find($id);
-                $event->update([
-                    "user_id" => $event->user_id,
-                    "title" => $request['title'] ?? $event->title ,
-                    "description" => $request["description"] ?? $event->description,
-                    "date" => $request["date"] ?? $event->date,
-                    "image" => $file_path ?? $event->image,
-                    "capacity" => $request['capacity'] ?? $event->capacity,
-                    "created_by" => $request['created_by'] ?? $event->created_by,
-                ]);
-                $event->save();
-        }
-        }catch (\Exception $e){
+
+            // Update the event
+            $event->update($dataToUpdate);
+
+        } catch (\Exception $e) {
             return response()->json($e->getMessage(), 422);
         }
-        //? return response that it's updated successfully if every work
-        return response()->json("Event updated successfully", 201);
+
+        // Return success response
+        return response()->json("Event updated successfully", 200);
     }
 
     /**
@@ -146,8 +147,7 @@ class EventController extends Controller
     public function destroy($id)
     {
         $event = event::find($id);
-//        return response()->json($event, 200);
-
+        //  return response()->json($event, 200);
             try{
                 //? delete the image file for the event
                 $file_path = $event->image;
