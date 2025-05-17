@@ -34,7 +34,7 @@ class BookController extends Controller
 
     public function store(Request $request )
     {
-        BookingCreated::dispatch($request);
+//        BookingCreated::dispatch($request);
 
 
         try{
