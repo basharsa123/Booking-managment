@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateEventRequest;
+use App\Http\Requests\EventShowController;
+use App\Http\Resources\ShowEventcontroller;
 use App\Models\event;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Concerns\ValidatesAttributes;
+use Illuminate\Validation\ValidationException;
 
 class EventController extends Controller
 {
@@ -17,8 +21,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = event::all();
-        if(! $events->isEmpty()) {return response()->json($events , 200);}
+        $events = event::with("user")->get();
+        if(! $events->isEmpty()) {return response()->json(ShowEventcontroller::collection($events ) , 202   );}
         else { return response()->json("No Events Found" , 404);}
     }
 
@@ -27,42 +31,26 @@ class EventController extends Controller
      */
 
 
-    public function store(Request $request)
+    public function store(CreateEventRequest $request)
     {
+        try{
+            $credentials = $request->validated();
+            $credentials["user_id"] = Auth::user()->id;
+            $credentials["created_by"] = Auth::user()->name;
+            $credentials["description"] = $request->description ?? "No description";
+            // upload the image file if there is an image
+            if ($request->hasFile("image")) {
+                $file = $request->file('image');
+                $file_name = time() . '_' . $file->getClientOriginalName();
+                $file_path = $file->storeAs('events', $file_name);
+                $credentials["image"] = $file_path;
+            }
+            $event = event::create($credentials);
 
-//        return response()->json(Auth::user()->id ?? 1 , 200);
-//         to validate the request
-        try {
-            $credentials = $request->validate([
-                "title" => "required",
-                "description" => "required",
-                "date" => "required|date",
-                "image" => "required|image|max:2048",
-                "capacity" => "required|integer|max:250",
-                "created_by" => "required",
-            ]);
-        } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 422);
-        }
-
-        try {
-            // upload the image file
-            $file = $request->file('image');
-            $file_name = time() . '_' . $file->getClientOriginalName();
-            $file_path = $file->storeAs('events', $file_name, 'public');
             // creating the new event
-            $event = event::create([
-                "user_id" => Auth::user()->id ?? 1,
-                "title" => $credentials['title'],
-                "description" => $credentials['description'],
-                "date" => $credentials['date'],
-                "image" => $file_path,
-                "capacity" => $credentials['capacity'],
-                "created_by" => $credentials['created_by'],
-            ]);
-            $slots[event::all()->last()->id] = $credentials['capacity'];
+            $slots[event::all()->last()->id] = $request['capacity'];
             return response()->json("Event created successfully", 201);
-        } catch (\Exception $e) {
+        }catch(\Exception $e){
             return response()->json($e->getMessage(), 400);
         }
     }

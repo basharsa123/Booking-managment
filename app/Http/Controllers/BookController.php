@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\BookingCreated;
+use App\Http\Requests\CreateBookRequest;
+use App\Http\Resources\ShowBookController;
 use App\Models\book;
 use App\Models\event;
 use App\Models\User;
@@ -21,7 +23,7 @@ class BookController extends Controller
         if(Auth::check()) {
             try {
                 $user_books = User::find(Auth::user()->id)->books; // is an array
-                return response()->json($user_books, 201);
+                return response()->json(ShowBookController::collection($user_books), 201);
             } catch (\Exception $exception) {
                 return view($exception->getMessage(), 402);
             }
@@ -32,34 +34,26 @@ class BookController extends Controller
      * Store a book for User
      */
 
-    public function store(Request $request )
+    public function store(CreateBookRequest $request )
     {
+
 //        BookingCreated::dispatch($request);
+//        return response()->json($request, 201);
 
-
+        $credentials = $request->validated();
         try{
             if (!Auth::check()) {
                 return response("Unauthorized", 401);
             }
-        $credentials = $request->validate([
-            "event_id" => ["required"],
-            "status" => ["required"],
-        ]);
-            $credentials['event_id'] = request('event_id');
-            $credentials['registered_at'] = now();
-            $credentials["attendance"] = $request->attendance ?? 0;
+            $credentials["user_id"] = Auth::user()->id;
+            $credentials["event_id"] = $request->event_id;
+            $credentials["registered_at"] = now()->format('Y-m-d H:i:s');
             // ? check if the event capacity and decrease it by one
-//            event::checkSlotAndBook($request->input("event_id") , event::find( request('event_id'))->capacity);
+            // event::checkSlotAndBook($request->input("event_id") , event::find( request('event_id'))->capacity);
 
 
             //?register a book
-            book::create([
-                "user_id" => Auth::user()->id,
-                "event_id" => $credentials['event_id'],
-                "registered_at" => $credentials['registered_at'],
-                "status" => $credentials['status'],
-                "attendance" => $credentials['attendance'],
-            ]);
+            book::create($credentials);
         }catch (\Exception $e){
             return response( $e->getMessage(), 422);
         }

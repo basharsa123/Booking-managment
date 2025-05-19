@@ -47,7 +47,7 @@ Route::group(
     function ($router)
     {
         Route::get("/index", [BookController::class, "show"])->name("book.show")->middleware("auth");
-        Route::post("/create", [BookController::class, "store"])->name("book.create")->middleware("auth");
+        Route::post("/create", [BookController::class, "store"])->name("book.store")->middleware("auth");
         Route::delete("/delete/{id}", [BookController::class, "destroy"])->name("book.destroy")->middleware("auth");
     }
 );
