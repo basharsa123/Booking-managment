@@ -7,8 +7,12 @@ use App\Http\Requests\EventShowController;
 use App\Http\Resources\ShowEventcontroller;
 use App\Models\event;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Concerns\ValidatesAttributes;
 use Illuminate\Validation\ValidationException;
@@ -21,7 +25,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = event::with("user")->get();
+        $events = Cache()->remember("event" , 60*60 , function() {
+            return event::with("user")->get();
+        });
         if(! $events->isEmpty()) {return response()->json(ShowEventcontroller::collection($events ) , 202   );}
         else { return response()->json("No Events Found" , 404);}
     }
@@ -46,7 +52,7 @@ class EventController extends Controller
                 $credentials["image"] = $file_path;
             }
             $event = event::create($credentials);
-
+            Artisan::call("cache:clear");
             // creating the new event
             $slots[event::all()->last()->id] = $request['capacity'];
             return response()->json("Event created successfully", 201);
@@ -60,7 +66,9 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $event_find = event::find($id);
+        $event_find = Cache::remember("event-show" , 60*60 , function() use($id){
+           return event::find($id);
+        });
         if($event_find)
         {
         return response()->json($event_find , 200);
@@ -76,7 +84,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        Artisan::call("cache:clear");
         // Find the event
         $event = Event::find($id);
         if (!$event) {
@@ -134,8 +142,12 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
+        Artisan::call("cache:clear");
         $event = event::find($id);
-        //  return response()->json($event, 200);
+        if(! Gate::allows("is_creator_of_event" , $event))
+        {
+            return response()->json("you are not allowed to delete an event since you are not its creator", 401);
+        }
             try{
                 //? delete the image file for the event
                 $file_path = $event->image;

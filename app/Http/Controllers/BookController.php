@@ -10,6 +10,7 @@ use App\Models\event;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 
 class BookController extends Controller
@@ -62,11 +63,17 @@ class BookController extends Controller
     /**
      * Remove the specified book from your books.
      */
-    public function destroy($id)
+    public function destroy($book)
     {
+
         //? delete the book
         try{
-            $book = book::find($id);
+            $book = book::find($book);
+            if(! Gate::allows("is_creator_of_book" , $book))
+            {
+                return response()->json("you are not allowed to delete that book you are not its creator", 401);
+            }
+
 //            event::dropTheSlot($book->id);
             $book->delete();
         }catch(\Exception $e){
