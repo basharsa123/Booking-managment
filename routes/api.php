@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\BookController;
 use App\Models\event;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::group(
         Route::delete('logout', [AuthController::class, 'logout'])->name("logout")->middleware("auth");
     }
 );
-//? it's under test
+//? it's all done (-_0)
 Route::group(
     [
         "middleware" => "api",
@@ -50,6 +51,7 @@ Route::group(
         Route::delete("/delete/{id}", [EventController::class, "destroy"])->name("event.destroy")->middleware("auth");
     }
 );
+//? it's all done (-_0)
 Route::group(
     [
         "middleware" => "api",

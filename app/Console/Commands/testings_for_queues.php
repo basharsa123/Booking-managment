@@ -35,20 +35,39 @@ class testings_for_queues extends Command
      */
     public function handle()
     {
-        $user =  User::find(1);
-        Testing_queue_worker::dispatch($user)->onQueue("tests");
+        Testing_queue_worker::dispatch()->onQueue("tests");
 
-//        $chain = [ // if any one doesn't work properly stop the chain array
+        // queues workflows types :
+        //tests for chain
+//        $chain = [
+//            // if any one doesn't work properly stop the chain array
 //            new Testing_queue_worker($user),
 //            new runrepo("to repo go"),
 //        ];
-//        Bus::chain($chain)->dispatch();
+//        Bus::chain($chain)
+//            ->catchCallbacks() // to send an error message if it stopped
+//        ->then(function(){
+//            logger("the batch process is passed");
+//            }) // to send message of succeeded process
+//        ->onQueue()
+//        ->onConnection()
+//            ->dispatch();
 
-//        $batch = [ // if any one doesn't work properly no matter
-//            new Testing_queue_worker($user),
+        //tests for batch
+//        $batch = [
+//            // if any one doesn't work properly no matter
+//            new Testing_queue_worker(),
 //            new runrepo("to repo go!"),
 //        ];
-//        Bus::batch($batch)->dispatch();
-
+//        Bus::batch($batch)
+//            ->catch(function ($batch , $e) {
+//                logger("the error is occurred : " . $e);
+//            })
+//            ->then(function(){
+//            logger("the batch process is passed");
+//            }) // to send message of succeeded process
+//        ->onQueue("default")
+//        ->onConnection("database")
+//        ->dispatch();
     }
 }

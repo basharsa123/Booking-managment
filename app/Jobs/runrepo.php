@@ -5,6 +5,7 @@ namespace App\Jobs;
 use Illuminate\Bus\Batchable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use mysql_xdevapi\Exception;
 
 class runrepo implements ShouldQueue
 {
@@ -25,6 +26,6 @@ class runrepo implements ShouldQueue
      */
     public function handle(): void
     {
-        logger("from runrepo" . $this->message);
+        logger("from run repo" . $this->message);
     }
 }
