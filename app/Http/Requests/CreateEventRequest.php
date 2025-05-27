@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\inFuture;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -26,7 +27,7 @@ class CreateEventRequest extends FormRequest
     {
         return [
             "title" => "required|string",
-            "date" => "required|date",
+            "date" => ["required","date" , new inFuture],
             "image" => "required|image|mimes:jpg,webp,svg",
             "capacity" => "required|numeric"
         ];

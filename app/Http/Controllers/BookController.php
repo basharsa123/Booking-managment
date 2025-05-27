@@ -37,9 +37,10 @@ class BookController extends Controller
 
     public function store(CreateBookRequest $request )
     {
+        $allow_slots =event::find($request->event_id)->capacity - book::where("event_id" , $request->event_id)->count();
 
 //        BookingCreated::dispatch($request);
-//        return response()->json($request, 201);
+//        return response()->json($allow_slots, 201);
 
         $credentials = $request->validated();
         try{
@@ -50,15 +51,16 @@ class BookController extends Controller
             $credentials["event_id"] = $request->event_id;
             $credentials["registered_at"] = now()->format('Y-m-d H:i:s');
             // ? check if the event capacity and decrease it by one
-            // event::checkSlotAndBook($request->input("event_id") , event::find( request('event_id'))->capacity);
-
-
+            if(!  $allow_slots >= 0)
+            {
+                return response()->json("sorry , the event slots is full ." ,201);
+            }
             //?register a book
             book::create($credentials);
         }catch (\Exception $e){
             return response( $e->getMessage(), 422);
         }
-        return response("Book added successfully", 201);
+        return response()->json("Book added successfully", 201);
     }
     /**
      * Remove the specified book from your books.
@@ -74,7 +76,6 @@ class BookController extends Controller
                 return response()->json("you are not allowed to delete that book you are not its creator", 401);
             }
 
-//            event::dropTheSlot($book->id);
             $book->delete();
         }catch(\Exception $e){
             return response($e->getMessage(), 422);

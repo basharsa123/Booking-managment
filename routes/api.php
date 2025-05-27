@@ -45,7 +45,16 @@ Route::group(
             return $events->first()->title;
         });
         Route::get("/index", [EventController::class, "index"])->name("event.index");
-        Route::get("/show/{id}", [EventController::class, "show"])->name("event.show");
+        Route::get("/show/{id}", [EventController::class, "show"])->name("event.show")
+            ->where("id", "regex:/^+$/i"); // to see if the id is not number will act as undefined route
+
+        // if there are multiple params in the route we can do constraints like:
+        // ->where([
+        //    'slug' => '[A-Za-z\-]+',
+        //     "slug" => 'regex'
+        //    'id' => '[0-9]+',
+        //]);
+
         Route::post("/create", [EventController::class, "store"])->name("event.store")->middleware("auth");
         Route::post("/update/{id}", [EventController::class, "update"])->name("event.update")->middleware("auth");
         Route::delete("/delete/{id}", [EventController::class, "destroy"])->name("event.destroy")->middleware("auth");
