@@ -7,6 +7,7 @@ use App\Http\Requests\EventShowController;
 use App\Http\Resources\ShowEventcontroller;
 use App\Models\event;
 use App\Models\User;
+use App\Services\ImageStore;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -37,7 +38,7 @@ class EventController extends Controller
      */
 
 
-    public function store(CreateEventRequest $request)
+    public function store(CreateEventRequest $request )
     {
         try{
             $credentials = $request->validated();
@@ -49,6 +50,9 @@ class EventController extends Controller
                 $file = $request->file('image');
                 $file_name = time() . '_' . $file->getClientOriginalName();
                 $file_path = $file->storeAs('events', $file_name);
+            }
+            if( ImageStore::store($request) )
+            {
                 $credentials["image"] = $file_path;
             }
             $event = event::create($credentials);
