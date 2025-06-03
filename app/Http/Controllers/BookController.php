@@ -44,9 +44,7 @@ class BookController extends Controller
 
         $credentials = $request->validated();
         try{
-            if (!Auth::check()) {
-                return response("Unauthorized", 401);
-            }
+
             $credentials["user_id"] = Auth::user()->id;
             $credentials["event_id"] = $request->event_id;
             $credentials["registered_at"] = now()->format('Y-m-d H:i:s');
